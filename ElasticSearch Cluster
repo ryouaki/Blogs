@@ -1,0 +1,87 @@
+How to create ES Cluster.
+
+ES Cluster need one master-node and multiple-nodes and one balancer-node
+
+This is example below:
+
+For Master-node *1
+steps:
+1 Open ./config/elasticsearch.yml
+2 Allocate a unique Cluster name just like : test_cluster
+3 Allocate a unique node name just like : test_master
+4 Set node.master : true
+5 Set node.data : false  
+6 Set transport.tcp.port: 9300
+7 Set http.port: 9200
+#About node.master&node.data please refer the Discription below
+
+For multiple-nodes *3
+steps:
+1 Copy from Master-node just like cmd : cp -R master-node child-node1~3
+2 Open ./config/elasticsearch.yml
+3 Allocate a unique Cluster name just like : test_cluster // Must the same as master node
+4 Allocate a unique node name just like : test_node1~3 // must unique name
+5 Set node.master : false
+6 Set node.data : true 
+7 Set transport.tcp.port: 9301
+8 Set http.port: 9201
+# 7&8 The port for every node must unique.
+
+For balancer-nodes *1
+steps:
+1 Copy from Master-node just like cmd : cp -R master-node balancer-node
+2 Open ./config/elasticsearch.yml
+3 Allocate a unique Cluster name just like : test_cluster // Must the same as master node
+4 Allocate a unique node name just like : test_balancer // must unique name
+5 Set node.master : false
+6 Set node.data : false  
+7 Set transport.tcp.port: 9304
+8 Set http.port: 9204
+# 7&8 The port for every node must unique.
+
+The last step:
+1 cd master-node-folder/start master-node
+2 cd child-node-folder/start child-node
+3 cd balancer-node-folder/start balancer-node
+
+The error status from ES Server
+503 : Set different node-name,Do not use default name for every es node
+409 : Use es cluster is ok.
+
+For logs.We need logs for improve performance in the future.
+#index.search.slowlog.threshold.query.warn: 10s
+#index.search.slowlog.threshold.query.info: 5s
+#index.search.slowlog.threshold.query.debug: 2s
+#index.search.slowlog.threshold.query.trace: 500ms
+
+#index.search.slowlog.threshold.fetch.warn: 1s
+#index.search.slowlog.threshold.fetch.info: 800ms
+#index.search.slowlog.threshold.fetch.debug: 500ms
+#index.search.slowlog.threshold.fetch.trace: 200ms
+
+#index.indexing.slowlog.threshold.index.warn: 10s
+#index.indexing.slowlog.threshold.index.info: 5s
+#index.indexing.slowlog.threshold.index.debug: 2s
+#index.indexing.slowlog.threshold.index.trace: 500ms
+
+
+# You can exploit these settings to design advanced cluster topologies.
+#
+# 1. You want this node to never become a master node, only to hold data.
+#    This will be the "workhorse" of your cluster.
+#
+#node.master: false
+#node.data: true
+#
+# 2. You want this node to only serve as a master: to not store any data and
+#    to have free resources. This will be the "coordinator" of your cluster.
+#
+#node.master: true
+#node.data: false
+#
+# 3. You want this node to be neither master nor data node, but
+#    to act as a "search load balancer" (fetching data from nodes,
+#    aggregating results, etc.)
+#
+#node.master: false
+#node.data: false
