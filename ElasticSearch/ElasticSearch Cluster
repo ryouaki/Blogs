@@ -4,7 +4,7 @@ ES Cluster need one master-node and multiple-nodes and one balancer-node
 
 This is example below:
 
-For Master-node *1
+For Master-node
 steps:
 1 Open ./config/elasticsearch.yml
 2 Allocate a unique Cluster name just like : test_cluster
@@ -15,9 +15,9 @@ steps:
 7 Set http.port: 9200
 #About node.master&node.data please refer the Discription below
 
-For multiple-nodes *3
+For multiple-nodes
 steps:
-1 Copy from Master-node just like cmd : cp -R master-node child-node1~3
+1 Copy from Master-node just like cmd : cp -R master-node child-node*N
 2 Open ./config/elasticsearch.yml
 3 Allocate a unique Cluster name just like : test_cluster // Must the same as master node
 4 Allocate a unique node name just like : test_node1~3 // must unique name
@@ -27,7 +27,7 @@ steps:
 8 Set http.port: 9201
 # 7&8 The port for every node must unique.
 
-For balancer-nodes *1
+For balancer-nodes
 steps:
 1 Copy from Master-node just like cmd : cp -R master-node balancer-node
 2 Open ./config/elasticsearch.yml
@@ -35,8 +35,8 @@ steps:
 4 Allocate a unique node name just like : test_balancer // must unique name
 5 Set node.master : false
 6 Set node.data : false  
-7 Set transport.tcp.port: 9304
-8 Set http.port: 9204
+7 Set transport.tcp.port: 9302
+8 Set http.port: 9202
 # 7&8 The port for every node must unique.
 
 The last step:
