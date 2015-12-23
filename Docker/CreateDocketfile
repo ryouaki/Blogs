@@ -1,0 +1,12 @@
+# Pull base image
+FROM ubuntu
+
+RUN ----->> Command what you want to do as you done at linux terminal
+
+ENV ----->> Environment
+
+COPY LOCALE_PATH IMAGE_PATH
+
+CMD ["COMMAND"]  ---->> Do something you want to do when finish the command above
+
+EXPOSE port number--->> # Expose ports for your app
