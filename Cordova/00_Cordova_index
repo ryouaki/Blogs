@@ -1,0 +1,10 @@
+本系列用于作为cordova的指导Guide去帮助新人了解Cordova的使用。
+
+00 目录
+01 Cordova安装配置以及命令行使用
+02 支持平台介绍（本系列目前只主要介绍IOS和Android）
+03 IOS平台Guide
+04 
+
+参考文献
+Cordova官方Guide：http://cordova.apache.org/docs/en/latest/

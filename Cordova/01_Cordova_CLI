@@ -1,0 +1,117 @@
+首先，我这里只介绍MAC OS X版本环境下的配置同linux
+
+01. 安装Cordova
+首先需要安装Nodejs环境，然后安装npm，然后使用命令node install cordova -g
+*node是你要执行的命令
+*install 是表示安装
+*cordova是你要安装的软件
+*-g是全局安装，这样你就可以在你的命令行任意目录下执行cordova命令了
+
+02. 创建APP
+$ cordova create project_path com.project.appname appname
+*cordova 执行的命令
+*create 命令cordova创建工程
+*project_path 创建程序根目录的名称
+*com.project.appname 创建程序标识符，也就是identifier，以后可以在程序里修改，不过改的地方很多
+*appname 程序名称，
+
+03. 添加支持的平台
+$ cordova platform add ios
+$ cordova platform add amazon-fireos
+$ cordova platform add android
+$ cordova platform add blackberry10
+$ cordova platform add firefoxos
+
+04. 查看当前工程支持哪些平台
+$ cordova platforms ls
+
+05. 删除特定平台（慎用，删除以后偶尔会出问题）
+$ cordova platform remove blackberry10
+$ cordova platform rm amazon-fireos
+$ cordova platform rm android
+
+06. build
+$ cordova build
+or
+$ cordova build ios
+
+$ cordova prepare ios
+$ cordova compile ios
+
+07. 在虚拟环境运行
+$ cordova emulate android
+
+08. 通过关键字查找现有可用的plugin
+$ cordova plugin search bar code
+Restle : com.phonegap.plugins.barcodescanner - Scans Barcodes
+
+09. 安装plugin
+Basic device information (Device API):
+    $ cordova plugin add cordova-plugin-device
+Network Connection and Battery Events:
+    $ cordova plugin add cordova-plugin-network-information
+    $ cordova plugin add cordova-plugin-battery-status
+Accelerometer, Compass, and Geolocation:
+    $ cordova plugin add cordova-plugin-device-motion
+    $ cordova plugin add cordova-plugin-device-orientation
+    $ cordova plugin add cordova-plugin-geolocation
+Camera, Media playback and Capture:
+    $ cordova plugin add cordova-plugin-camera
+    $ cordova plugin add cordova-plugin-media-capture
+    $ cordova plugin add cordova-plugin-media
+Access files on device or network (File API):
+    $ cordova plugin add cordova-plugin-file
+    $ cordova plugin add cordova-plugin-file-transfer
+Notification via dialog box or vibration:
+    $ cordova plugin add cordova-plugin-dialogs
+    $ cordova plugin add cordova-plugin-vibration
+Contacts:
+    $ cordova plugin add cordova-plugin-contacts
+Globalization:
+    $ cordova plugin add cordova-plugin-globalization
+Splashscreen:
+    $ cordova plugin add cordova-plugin-splashscreen
+Open new browser windows (InAppBrowser):
+    $ cordova plugin add cordova-plugin-inappbrowser
+Debug console:
+    $ cordova plugin add cordova-plugin-console
+    
+10. 查看当前安装的plugin
+$ cordova plugin ls
+
+11. 删除plugin
+$ cordova plugin rm cordova-plugin-console
+$ cordova plugin remove cordova-plugin-console
+
+12. 安装指定version的plugin
+$ cordova plugin add cordova-plugin-console@latest
+$ cordova plugin add cordova-plugin-console@0.2.1
+
+13. 从指定url获取plugin镜像
+$ cordova plugin add https://github.com/apache/cordova-plugin-console.git
+or
+$ cordova plugin add https://github.com/apache/cordova-plugin-console.git#r0.2.0
+or
+$ cordova plugin add https://github.com/apache/cordova-plugin-console.git#CB-8438cordova-plugin-console
+or 
+$ cordova plugin add https://github.com/apache/cordova-plugin-console.git#f055daec45575bf08538f885e09c85a0eba363ff
+or
+$ cordova plugin add https://github.com/someone/aplugin.git#:/my/sub/dir
+or
+$ cordova plugin add https://github.com/someone/aplugin.git#r0.0.1:/my/sub/dir
+or
+$ cordova plugin add ../my_plugin_dir
+
+14. merges目录
+在工程根目录下创建merges目录结构如下：
+merges
+    --android
+    --ios
+里面存放的文件，当rebuild的时候不会被根目录www目录下的文件所覆盖
+这样就可以保留针对特定平台而使用的css，js，html而不用每次build后回滚代码了。
+#我尝试在最新版本cordova使用该文件夹已经不起作用，后来问度娘说是新版本已经取消了使用hooks替代。
+
+15. 更新cordova版本（该功能只支持cordova3.0以上） 
+$ sudo npm update -g cordova
+$ cordova platform update android
+$ cordova platform update ios

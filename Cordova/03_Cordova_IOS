@@ -1,0 +1,92 @@
+本文主要介绍如何配置IOS平台的相关内容
+
+·IOS平台config.xml的配置
+ 01 EnableViewportScale (boolean, defaults to false) 如果设置成true，用于在viewport的meta标签是否生效
+    #Example：<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
+    #绝大多数情况下，我们是应该使用false，我们应该让我们的程序launch起来像一个app而不是一个浏览器
+    #ViewPort <meta>标记用于指定用户是否可以缩放Web页面，如果可以，那么缩放到的最大和最小缩放比例是什么。
+    #使用 ViewPort <meta>标记还表示文档针对移动设备进行了优化。ViewPort <meta>标记的content值 是由指令及其值组成的以逗号分隔的列表。
+    #<meta name=”viewport” content=”width=240, height=320, user-scalable=yes, initial-scale=2.5, maximum-scale=5.0, minimun-scale=1.0”>
+    #width 和height指令分别指定视区的逻辑宽度和高度。他们的值要么是以像素为单位的数字，要么是一个特殊的标记符号。
+    #width指令使用device- width标记可以指示视区宽度应为设备的屏幕宽度。类似地height指令使用device-height标记指示视区高度为设备的屏幕高度。
+    #user-scalable指令指定用户是否可以缩放视区，即缩放Web页面的视图。值为yes时允许用户进行缩放，值为no时不允许缩放。
+    #initial-scale指令用于设置Web页面的初始缩放比例。默认的初始缩放比例值因智能手机浏览器的不同而有所差异。
+    #通常情况下设备会在浏览器中呈现出整个Web页面，设为1.0则将显示未经缩放的Web文档。
+    #maximum-scale和minimum-scale指令用于设置用户对Web页面缩放比例的限制。值的范围为0.25至10.0之间。
+    #与initial-scale相同，这些指令的值是应用于视区内容的缩放比例。
+    #所有智能手机浏览器都支持ViewPort <meta>标记的width和user-scalabel指令。
+    #但是Opera Mobile不使用user-scalable指令，而是主张用户应始终保留在移动浏览器中缩放Web页面的能力。
+
+02 MediaPlaybackAllowsAirPlay (boolean, defaults to true): 是否阻止使用airplay功能
+    #<preference name="MediaPlaybackAllowsAirPlay" value="false"/>
+    
+03 MediaPlaybackRequiresUserAction (boolean, defaults to false) 是否阻止自动播放媒体文件
+    #<preference name="MediaPlaybackRequiresUserAction" value="true"/>
+    
+04 AllowInlineMediaPlayback (boolean, defaults to false) 是否允许重放，需要在浏览器提供的<video>标签内添加webkit-playsinline
+    #<preference name="AllowInlineMediaPlayback" value="true"/>
+    
+05 BackupWebStorage (string, either none, local, or the default cloud) 选择程序备份的地点
+    #none不进行备份
+    #local 备份到本地iTurn
+    #cloud 备份到via iCloud
+    
+06 TopActivityIndicator (string, defaults to gray) 用于设置顶部状态栏风格，可选参数whiteLarge, white, and gray
+    #<preference name="TopActivityIndicator" value="white"/>
+
+07 KeyboardDisplayRequiresUserAction (boolean, defaults to true) 是否禁止当输入框使用focus()获得焦点的时候显示键盘
+    #<preference name="KeyboardDisplayRequiresUserAction" value="false"/>
+    #绝大多数情况下我们应该设置成false，除非你不想让用户输入任何信息
+    
+08 SuppressesIncrementalRendering (boolean, defaults to false) 是否支持数据全部渲染完成后再显示到界面上
+    #<preference name="SuppressesIncrementalRendering" value="true"/>
+    
+09 GapBetweenPages (float, defaults to 0) 界面间隙(没搞明白，不常用，应该是配置ios UIWebView的参数)
+    #<preference name="GapBetweenPages" value="0"/>
+    
+10 PageLength (float, defaults to 0) 每个界面的size(也没搞明白，不常用，应该是配置ios UIWebView的参数)
+    #<preference name="PageLength" value="0"/>
+    
+11 PaginationBreakingMode (string, defaults to page) 这个不太懂，没用过，也不常用，估计也是跟ios UIWebView相关的参数
+    #可选值 page and column
+    #<preference name="PaginationBreakingMode" value="page"/>
+    
+12 PaginationMode (string, defaults to unpaginated) 用于设置分页相关的，是ios UIWebView相关的设置
+    # 可选值 unpaginated, leftToRight, topToBottom, bottomToTop, and rightToLeft.
+    #<preference name="PaginationMode" value="unpaginated"/>
+    
+13 UIWebViewDecelerationSpeed (string, defaults to normal) 用于设置滚动条滑动速度
+    #可选值 normal, fast
+    #<preference name="UIWebViewDecelerationSpeed" value="fast" />
+    
+14 ErrorUrl (string, not set by default) 设置错误信息页
+    #<preference name="ErrorUrl" value="myErrorPage.html"/>
+    
+15 OverrideUserAgent (string, not set by default) 用于重新设置UserAgent信息 
+    #<preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" />
+    
+16 AppendUserAgent (string, not set by default) 在UserAgent添加新内容
+    #<preference name="AppendUserAgent" value="My Browser" />
+    #当OverrideUserAgent被设置时无效
+    
+17 target-device (string, defaults to universal) 设置支持设备类型，手机，平板，无限制
+    #可选值 handset, tablet, universal
+    #<preference name="target-device" value="universal" />
+    
+18 deployment-target (string, not set by default) 设置支持的最低版本
+    #<preference name="deployment-target" value="7.0" />
+    
+19 CordovaWebViewEngine (string, defaults to 'CDVUIWebViewEngine') 设置cordova引擎，一般没人会设置这个
+    #<preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
+    
+20 SuppressesLongPressGesture (boolean, defaults to false) 是否绕过3Dtouch长按弹出一个放大窗口显示内容的功能
+    #<preference name="SuppressesLongPressGesture" value="true" />
+    
+21 Suppresses3DTouchGesture (boolean, defaults to false) 是否绕过3Dtouch功能
+    #<preference name="Suppresses3DTouchGesture" value="true" />
+    #如果Suppresses3DTouchGesture为true，SuppressesLongPressGesture最好也要设置为true
+    
+22 CDVSystemSchemesOverride (string, defaults to maps,tel,telprompt) 设置允许被传送给系统的协议(没太懂)
+    #<preference name="CDVSystemSchemesOverride" value="maps,tel,telprompt" />
+
+参考资料：http://cordova.apache.org/docs/en/latest/guide/platforms/ios/config.html
