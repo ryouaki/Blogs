@@ -1,0 +1,48 @@
+支持平台介绍（本系列目前只主要介绍IOS和Android）
+
+在进行Cordova开发之前，必须安装对应平台的开发环境比如：
+IOS--XCode
+Android--Android SDK
+# 这里对于新手学习我个人建议是使用Linux系统作为开发平台先从Android开始
+#IOS只能在Mac OS X平台开发，硬件成本太高。但是对于Cordova来说开发过程都是差不多的。
+
+目前Cordova支持的平台如下：
+·Amazon Fire OS
+·Android
+·BlackBerry 10
+·Firefox OS
+·iOS
+·Windows Phone 8
+·Windows
+·Tizen
+
+.通用的config.xml配置属性
+01 <preference name="Fullscreen" value="true" /> 是否隐藏顶端status bar
+02 <preference name="DisallowOverscroll" value="true"/> 设置是否禁止滑动超出范围，此时会在超出部分显示黑色背景
+    #仅支持IOS&Android
+03 <preference name="BackgroundColor" value="0xff0000ff"/> 主背景色
+    #仅支持BlackBerry&Android
+04 <preference name="HideKeyboardFormAccessoryBar" value="true"/> 隐藏键盘显示时上面附带的status bar
+    #仅支持BlackBerry
+05 <preference name="Orientation" value="landscape" /> 锁定显示朝向landscape or portrait
+    #<platform name="android">
+    #    <preference name="Orientation" value="sensorLandscape" />
+    #</platform>
+    #<platform name="ios">
+    #    <preference name="Orientation" value="all" />
+    #</platform>
+06 为特定平台添加plugin，需要在指定平台的config.xml单独设置，在使用cordova build或者run指令的时候会消失 
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+07 为指定平台单独设置属性
+    <platform name="android">
+        <preference name="Fullscreen" value="true" />
+    </platform>
+08 <hook type="after_plugin_install" src="scripts/afterPluginInstall.js" /> 具体参见后续章节hook
+    
+
+参考资料：http://cordova.apache.org/docs/en/latest/guide/platforms/index.html

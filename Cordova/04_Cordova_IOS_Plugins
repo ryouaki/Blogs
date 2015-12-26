@@ -1,0 +1,47 @@
+本节主要介绍如何在IOS平台下创建和使用Plugin
+
+·IOS平台下的Plugin是一个Object-c的类，并且继承至Plugin，然后通过cordova的exec方法去从js端调用
+此类的某一个方法
+#exec(<successFunction>, <failFunction>, <service>, <action>, [<args>]);
+
+·所有的plugin都必须通过各自平台下的config.xml中使用<feature>映射以后才能够被正确使用
+#<feature name="LocalStorage">
+#    <param name="ios-package" value="CDVLocalStorage" />
+#</feature>
+
+·Plugin的创建和生命周期
+Plugin的生命周期与WebView是一样的，Plugin一般情况下是在第一次被call的时候实例化。
+此外也可以通过如下配置使其在plugin加载时实例化
+#<feature name="Echo">
+#    <param name="ios-package" value="Echo" />
+#    <param name="onload" value="true" />
+#</feature>
+
+plugin没有指定初始化函数将调用pluginInitialize进行初始化
+
+·如何编写一个自定义的plugin
+plugin函数定义格式
+(void)myMethod:(CDVInvokedUrlCommand*)command
+command.arguments 是js端传入的参数
+
+·如何向js端返回数据
+#pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"ok"];
+#messageAsString是用于返回给js端的字符串参数，一般需要组织成json格式，方便js端解析
+#当然也有其他格式的数据比如messageAsArrayBuffer，messageAsMultipart，但是对于我来说messageAsString已经足够
+#[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+#此为固定调用，表示向js端返回。
+
+·如何在plugin函数中使用线程
+// Copy from http://cordova.apache.org/docs/en/latest/guide/platforms/ios/plugin.html
+[self.commandDelegate runInBackground:^{
+    NSString* payload = nil;
+    // Some blocking logic...
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:payload];
+    // The sendPluginResult method is thread-safe.
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}];
+在日常开发中肯定会遇到很耗时的操作。所以我们需要在线程中处理数据，比如上面代码。
+[self.commandDelegate runInBackground:^{
+    。。。
+}];
+该代码可以让包块中的代码在后台运行而不影响前台用户体验
