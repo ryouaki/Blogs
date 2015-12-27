@@ -1,0 +1,81 @@
+使用Plugman管理plugins
+从Cordova3.0以后，Cordova把所有关于Device APIs的相关代码都作为plugin并且从Cordova中去除。如果想要使用
+Device API相关的调用，可以通过以下两种方式
+·如果使用混合平台，可以使用CLI命令添加或者删除plugin
+·如果只用于一个特定平台的开发就可以使用plugman
+
+·安装Plugman可以使用如下命令
+$ npm install -g plugman
+同时你必须安装git，以确保可以访问远程git url
+
+#如果你安装以后无法正确运行plugman命令，需要确保npm已经配置妥当
+
+·使用如下指令添加plugin
+$ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin <name|url|path> [--plugins_dir <directory>] [--www <directory>] [--variable <name>=<value> [--variable <name>=<value> ...]]
+--plugin参数所指向的目录或者url必须存在
+--plugins_dir默认指向<project>/cordova/plugins, 也可以是包含plugin的子目录
+--www 默认指向工程根目录的 www 
+
+·使用如下命令卸载plugin，必须指定一个plugin id
+$ plugman --uninstall --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin <id> [--www <directory>] [--plugins_dir <directory>]
+
+·使用如下命令获取help(学会参看help是非常重要的，每一次版本更新后，当出现问题的时候，往往可以从中发现问题所在)
+plugman -help
+plugman  # same as above
+
+·使用-D参数可以输出debugging信息
+# 添加battery-status plugin带项目的 Android 平台
+plugman -d --platform android --project myProject --plugin cordova-plugin-battery-status
+
+·查看当前plugman的版本
+plugman -v
+
+·如何查找需要自己想要使用的plugin
+plugman search <plugin keywords>
+
+·修改默认的plugin远程路径
+plugman config set registry <url-to-registry>
+plugman config get registry
+
+·查看plugin信息
+plugman info <id>
+
+·下面的例子是如何安装比较常用的plugin的指令
+·cordova-plugin-battery-status
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-battery-status
+·cordova-plugin-camera
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-camera
+·cordova-plugin-console
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-console
+·cordova-plugin-contacts
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-contacts
+·cordova-plugin-device
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-device
+·cordova-plugin-device-motion (accelerometer)
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-device-motion
+·cordova-plugin-device-orientation (compass)
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-device-orientation
+·cordova-plugin-dialogs
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-dialogs
+·cordova-plugin-file
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-file
+·cordova-plugin-file-transfer
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-file-transfer
+·cordova-plugin-geolocation
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-geolocation
+·cordova-plugin-globalization
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-globalization
+·cordova-plugin-inappbrowser
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-inappbrowser
+·cordova-plugin-media
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-media
+·cordova-plugin-media-capture
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-media-capture
+·cordova-plugin-network-information
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-network-information
+·cordova-plugin-splashscreen
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-splashscreen
+·cordova-plugin-vibration
+ plugman --platform <ios|amazon-fireos|android|blackberry10|wp8> --project <directory> --plugin cordova-plugin-vibration
+
+参考连接：http://cordova.apache.org/docs/en/latest/plugin_ref/plugman.html

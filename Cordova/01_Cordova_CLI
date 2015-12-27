@@ -102,14 +102,13 @@ $ cordova plugin add https://github.com/someone/aplugin.git#r0.0.1:/my/sub/dir
 or
 $ cordova plugin add ../my_plugin_dir
 
-14. merges目录
+14. merges目录(我尝试在最新版本cordova使用该文件夹已经不起作用，后来问度娘说是新版本已经取消了使用hooks替代)
 在工程根目录下创建merges目录结构如下：
 merges
     --android
     --ios
 里面存放的文件，当rebuild的时候不会被根目录www目录下的文件所覆盖
 这样就可以保留针对特定平台而使用的css，js，html而不用每次build后回滚代码了。
-#我尝试在最新版本cordova使用该文件夹已经不起作用，后来问度娘说是新版本已经取消了使用hooks替代。
 
 15. 更新cordova版本（该功能只支持cordova3.0以上） 
 $ sudo npm update -g cordova

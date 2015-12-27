@@ -4,7 +4,10 @@
 01 Cordova安装配置以及命令行使用
 02 支持平台介绍（本系列目前只主要介绍IOS和Android）
 03 IOS平台Guide
-04 
+04 IOS plugin
+05 IOS WebViews
+06 IOS Plugman
+07 Cordova的图标和启动画面的设置
 
 参考文献
 Cordova官方Guide：http://cordova.apache.org/docs/en/latest/

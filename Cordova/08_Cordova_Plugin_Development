@@ -1,0 +1,81 @@
+Plugin开发指导
+Plugin是一个可以让Cordova webView与原生平台代码通信的一个注入代码，Plugin提供了基于web的应用无法访问的设备和平台功能。
+主要的Cordova的api特点都是以plugin的形式提供的，还有一些其他的比如二维码扫描等一些功能也是通过plugin实现的。
+
+Plugin由不同平台的原生代码提供功能，并提供统一的JS接口给web端调用。
+
+#特别提醒，如果想写一个plugin，最好先参照已经写好的plugin。
+
+·通常我们使用CLI的plugin add指令来添加plugin
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+plugin的存储url必须在plugin.xml进行配置，这里有很多种方式配置该文件 
+下面是Device plugin的配置参考
+    <?xml version="1.0" encoding="UTF-8"?>
+    <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+            id="cordova-plugin-device" version="0.2.3">
+        <name>Device</name>
+        <description>Cordova Device Plugin</description>
+        <license>Apache 2.0</license>
+        <keywords>cordova,device</keywords>
+        <js-module src="www/device.js" name="device">
+            <clobbers target="device" />
+        </js-module>
+        <platform name="ios">
+            <config-file target="config.xml" parent="/*">
+                <feature name="Device">
+                    <param name="ios-package" value="CDVDevice"/>
+                </feature>
+            </config-file>
+            <header-file src="src/ios/CDVDevice.h" />
+            <source-file src="src/ios/CDVDevice.m" />
+        </platform>
+    </plugin>
+在xml的最顶端。提供的id属性用于识别plugin包，js-module标签指定js接口文件的位置，platform用于描述在哪些平台可用
+config-file用于指定如何添加包信息，header-file和source-file用于指定代码文件
+
+我们可以使用plugman去管理我们的plugin
+首先我们必须在www目录的index.html引入这个对应的js文件
+#<script src="myplugin.js"></script>
+然后执行如下命令：
+$ plugman install --platform ios --project /path/to/my/project/www --plugin /path/to/my/plugin
+
+通过js接口调用plugin
+    cordova.exec(function(winParam) {}, // 当调用成功时的回调
+                 function(error) {},    // 当调用失败时的回掉
+                 "service",             // plugin类名
+                 "action",              // 在ios是函数名，在android是一个if判断的分支
+                 ["firstArgument", "secondArgument", 42, false]); //传递的参数。通过arguments数组在plugin中取得
+                 
+例子：
+    window.echo = function(str, callback) {
+        cordova.exec(callback, function(err) {
+            callback('Nothing to echo.');
+        }, "Echo", "echo", [str]);
+    };
+
+    window.echo("echome", function(echoValue) {
+        alert(echoValue == "echome"); // should alert true.
+    });
+    
+原生接口
+通过js去调用你的plugin，那么我们就要为不同的平台去实现对应的plugin，下面是目前cordova支持plugin的平台
+Amazon Fire OS Plugins
+Android Plugins
+iOS Plugins
+BlackBerry 10 Plugins
+Windows Phone 8 Plugins
+Windows Plugins
+The Tizen platform does not support plugins.
+
+发布plugins，当你完成你的plugin以后，你需要发布你的plugin到社区或者什么地方你希望发布的地方。
+如果是发布到npm请详细阅读npm的发布指导
+#目前cordova的plugin服务器已经设置成只读模式了。以后会全部移植到npm上面
+
+如何发布plugin到npm
+create package.json file for your plugin:
+创建一个packaga.json文件
+$ plugman createpackagejson /path/to/your/plugin
+
+创建一个用户如果以前没有的话
+$ npm adduser 
+$ npm publish /path/to/your/plugin

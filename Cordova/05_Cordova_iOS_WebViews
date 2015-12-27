@@ -1,0 +1,106 @@
+#这个章节需要一定IOS开发环境配置知识，我暂时还不具备ios独立开发能力。等以后再说吧
+
+This guide shows how to embed a Cordova-enabled WebView component within a larger iOS application. For details on how these components can communicate with each other, see Application Plugins.
+
+Support for WebViews for iOS started with Cordova version 1.4, using a Cleaver component for which the Xcode template serves as a reference implementation. Cordova 2.0 and later versions only support the subproject-based Cleaver implementation.
+
+These instructions require at least Cordova 3.x and Xcode 6.0, along with a config.xml file from a newly created iOS project. You can use the procedure in The Command-Line Interface to create a new project, then obtain the config.xml file from within the named application's subdirectory within platforms/ios.
+
+To follow these instructions, make sure you have the latest Cordova distribution. Download it from cordova.apache.org and unzip its iOS package.
+
+Adding Cleaver to the Xcode Project (CordovaLib Sub-Project)
+Quit Xcode if it is running.
+
+Open a terminal and navigate to the source directory for Cordova iOS.
+
+Copy the config.xml file described above into the project directory.
+
+Open Xcode and use the Finder to copy the config.xml file into its Project Navigator window.
+
+Choose Create groups for any added folders and press Finish.
+
+Use the Finder to copy the CordovaLib/CordovaLib.xcodeproj file into Xcode's Project Navigator
+
+Select CordovaLib.xcodeproj within the Project Navigator.
+
+Type the Option-Command-1 key combination to show the File Inspector.
+
+Choose Relative to Group in the File Inspector for the drop-down menu for Location.
+
+Select the project icon in the Project Navigator, select the Target, then select the Build Settings tab.
+
+Add -force_load and -Obj-C for the Other Linker Flags value.
+
+Click on the project icon in the Project Navigator, select the Target, then select the Build Phases tab.
+
+Expand Link Binaries with Libraries.
+
+Select the + button, and add the following frameworks. Optionally within the Project Navigator, move them under the Frameworks group:
+
+AssetsLibrary.framework
+CoreLocation.framework
+CoreGraphics.framework
+MobileCoreServices.framework
+Expand Target Dependencies, the top box with that label if there's more than one box.
+
+Select the + button, and add the CordovaLib build product.
+
+Expand Link Binaries with Libraries, the top box with that label if there's more than one box.
+
+Select the + button, and add libCordova.a.
+
+Set the Xcode Preferences → Locations → Derived Data → Advanced... to Unique.
+
+Select the project icon in the Project Navigator, select your Target, then select the Build Settings tab.
+
+Search for Header Search Paths. For that setting, add these three values below, including the quotes:
+
+"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
+"$(OBJROOT)/UninstalledProducts/include"
+"$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include"
+"$(BUILT_PRODUCTS_DIR)"
+As of Cordova 2.1.0, CordovaLib has been upgraded to use Automatic Reference Counting (ARC). You don't need to upgrade to ARC to use CordovaLib, but if you want to upgrade your project to use ARC, you should use the Xcode migration wizard from the Edit → Refactor → Convert to Objective-C ARC... menu, de-select libCordova.a, then run the wizard to completion.
+
+Using CDVViewController
+Add the following header:
+
+#import <Cordova/CDVViewController.h>
+Instantiate a new CDVViewController and retain it somewhere, e.g., to a class property:
+
+CDVViewController* viewController = [CDVViewController new];
+Optionally, set the wwwFolderName property, which defaults to www:
+
+viewController.wwwFolderName = @"myfolder";
+Optionally, set the start page in the config.xml file's <content> tag, either a local file:
+
+<content src="index.html" />
+...or a remote site:
+
+<content src="http://apache.org" />
+Optionally, set the useSplashScreen property, which defaults to NO:
+
+viewController.useSplashScreen = YES;
+Set the view frame. Always set this as the last property:
+
+viewController.view.frame = CGRectMake(0, 0, 320, 480);
+Add Cleaver to the view:
+
+[myView addSubview:viewController.view];
+Adding HTML, CSS and JavaScript Assets
+Create a new directory within the project, www for example.
+
+Place HTML, CSS and JavaScript assets into this directory.
+
+Use the Finder to copy the directory into Xcode's Project Navigator window.
+
+Select Create folder references for any added folders.
+
+Set the appropriate wwwFolderName and startPage properties for the directory you initially created, or use the defaults (specified in the previous section) when instantiating the CDVViewController.
+
+/*
+ if you created a folder called 'myfolder' and
+ you want the file 'mypage.html' in it to be
+ the startPage
+*/
+viewController.wwwFolderName = @"myfolder";
+viewController.startPage = @"mypage.html"
