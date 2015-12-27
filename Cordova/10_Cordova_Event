@@ -1,0 +1,73 @@
+·deviceready
+    The event fires when Cordova is fully loaded.
+    document.addEventListener("deviceready", yourCallbackFunction, false);
+    Supported Platforms
+        Amazon Fire OS
+        Android
+        BlackBerry 10
+        iOS
+        Tizen
+        Windows Phone 8
+        Windows 8
+·pause
+    The event fires when an application is put into the background.
+    document.addEventListener("pause", yourCallbackFunction, false);
+    Supported Platforms
+        Amazon Fire OS
+        Android
+        BlackBerry 10
+        iOS
+        Windows Phone 8
+        Windows 8
+·resume
+    The event fires when an application is retrieved from the background.
+    document.addEventListener("resume", yourCallbackFunction, false);
+    Supported Platforms
+        Amazon Fire OS
+        Android
+        BlackBerry 10
+        iOS
+        Windows Phone 8
+        Windows 8
+·backbutton
+    The event fires when the user presses the back button.
+    document.addEventListener("backbutton", yourCallbackFunction, false);
+    Supported Platforms
+        Amazon Fire OS
+        Android
+        BlackBerry 10
+        Windows Phone 8
+·menubutton
+    The event fires when the user presses the menu button.
+    document.addEventListener("menubutton", yourCallbackFunction, false);
+    Supported Platforms
+        Amazon Fire OS
+        Android
+        BlackBerry 10
+searchbutton
+    The event fires when the user presses the search button on Android.
+    document.addEventListener("searchbutton", yourCallbackFunction, false);
+    Supported Platforms
+        Android
+·startcallbutton
+    The event fires when the user presses the start call button.
+    document.addEventListener("startcallbutton", yourCallbackFunction, false);
+    Supported Platforms
+        BlackBerry 10
+·endcallbutton
+    This event fires when the user presses the end call button.
+    document.addEventListener("endcallbutton", yourCallbackFunction, false);
+    Supported Platforms
+        BlackBerry 10
+·volumedownbutton
+    The event fires when the user presses the volume down button.
+    document.addEventListener("volumedownbutton", yourCallbackFunction, false);
+    Supported Platforms
+        BlackBerry 10
+        Android
+·volumeupbutton
+    The event fires when the user presses the volume up button.
+    document.addEventListener("volumeupbutton", yourCallbackFunction, false);
+    Supported Platforms
+        BlackBerry 10
+        Android

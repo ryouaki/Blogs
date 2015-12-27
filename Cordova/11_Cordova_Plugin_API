@@ -1,0 +1,45 @@
+以下是传统的Cordova plugin
+·Battery Status
+Monitor the status of the device's battery.
+·Camera
+Capture a photo using the device's camera.
+·Console
+Add additional capability to console.log().
+·Contacts
+Work with the devices contact database.
+·Device
+Gather device specific information.
+·Device Motion (Accelerometer)
+Tap into the device's motion sensor.
+·Device Orientation (Compass)
+Obtain the direction that the device is pointing.
+·Dialogs
+Visual device notifications.
+·FileSystem
+Hook into native file system through JavaScript.
+·File Transfer
+Hook into native file system through JavaScript.
+·Geolocation
+Make your application location aware.
+·Globalization
+Enable representation of objects specific to a locale.
+·InAppBrowser
+Launch URLs in another in-app browser instance.
+·Media
+Record and play back audio files.
+·Media Capture
+Capture media files using device's media capture applications.
+·Network Information (Connection)
+Quickly check the network state, and cellular network information.
+·Splashscreen
+Show and hide the applications splash screen.
+·Vibration
+An API to vibrate the device.
+·StatusBar
+An API for showing, hiding and configuring status bar background.
+·Whitelist
+A plugin to whitelist network requests. Must install to have any network requests in your applications.
+·Legacy Whitelist
+A plugin to use the old style of whitelist before it was ripped out and changed in the whitelist plugin.
+
+Non-English translations of these plugin docs can be found by going to the plugin github repos and looking in the docs folder

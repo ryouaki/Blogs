@@ -1,4 +1,4 @@
-Plugin开发指导
+Plugin开发指导(其实读完以后发现，这个指导只是用于告诉你如何安装一个plugin到你的工程和如何使用它)
 Plugin是一个可以让Cordova webView与原生平台代码通信的一个注入代码，Plugin提供了基于web的应用无法访问的设备和平台功能。
 主要的Cordova的api特点都是以plugin的形式提供的，还有一些其他的比如二维码扫描等一些功能也是通过plugin实现的。
 
