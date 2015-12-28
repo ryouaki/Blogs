@@ -23,3 +23,9 @@ Elasticsearch is a distributed RESTful search engine built for the cloud. Featur
 * Per operation consistency
 ** Single document level operations are atomic, consistent, isolated and durable.
 * Open Source under the Apache License, version 2 ("ALv2")
+
+Install elasticsearch 
+
+curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.5.tar.gz
+
+tar -xvf elasticsearch-1.7.5.tar.gz
