@@ -621,11 +621,6 @@ console.log( a ); // ReferenceError
 console.log( b ); // ReferenceError
 ```
 
-More about:
-
-- [Let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) at MDN
-- [Const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) at MDN
-
 ### Arrow Functions
 
 When you must use function expressions (as when passing an anonymous function), you can use arrow function notation.
@@ -677,10 +672,6 @@ If the function body fits on one line and there is only a single argument, feel 
 
 ```
 
-More about:
-
-- [Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) at MDN
-
 ### Object Property Shorthand
 
 You can use property value shorthand.
@@ -730,10 +721,6 @@ const obj = {
 };
 ```
 
-More about:
-
-- [Object Property Shorthand](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions) at MDN
-
 ### Object Method Shorthand
 
 You can use object method shorthand.
@@ -757,10 +744,6 @@ const atom = {
     },
 };
 ```
-
-More about:
-
-- [Object Method Shorthand](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Method_definitions) at MDN
 
 ### Object Computed Properties
 
@@ -789,10 +772,6 @@ const obj = {
 };
 ```
 
-More about:
-
-- [Object Computed Properties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names) at MDN
-
 ### Template Strings
 
 When programmatically building up strings, you can use template strings instead of concatenation.
@@ -810,10 +789,6 @@ function sayHi( name ) {
     return `How are you, ${ name }?`;
 }
 ```
-
-More about:
-
-- [Template Strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings) at MDN
 
 ### Destructuring
 
@@ -880,10 +855,6 @@ function processInput( input ) {
 const { left, top } = processInput( input );
 ```
 
-More about:
-
-- [Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) at MDN
-
 ### Default Parameters
 
 You can use default parameter syntax rather than mutating function arguments.
@@ -912,10 +883,6 @@ function handleThings( opts = {} ) {
 }
 ```
 
-More about:
-
-- [Default Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) at MDN
-
 ### Rest
 
 Never use `arguments`, opt to use rest syntax `...` instead.
@@ -936,10 +903,6 @@ function concatenateAll( ...args ) {
 }
 ```
 
-More about:
-
-- [Rest](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) at MDN
-
 ### Array Spreads
 
 You can use array spreads `...` to copy arrays.
@@ -951,10 +914,6 @@ const itemsCopy = items.slice();
 // better
 const itemsCopy = [ ...items ];
 ```
-
-More about:
-
-- [Array Spreads](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) at MDN
 
 ### Promises
 
