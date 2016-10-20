@@ -52,41 +52,6 @@ try {
 }
 ```
 
-## Arrays and Function Calls
-Always include extra spaces around elements and arguments:
-
-```js
-array = [ a, b ];
-
-foo( arg );
-
-foo( 'string', object );
-
-foo( options, object[ property ] );
-
-foo( node, 'property', 2 );
-
-// Unlike the WordPress core standards, we always add a single space
-// around object literals and callbacks.
-foo( {
-	a: 'alpha',
-	b: 'beta'
-} );
-
-foo( data, function() {
-    // Do stuff
-} );
-
-foo( function() {
-    // Do stuff
-}.bind( this ) );
-
-foo( function() {
-    // Do stuff
-}, options );
-
-```
-
 ## Object
 
 Object and array expressions can be on one line if they are short (remember the line length limits). 
