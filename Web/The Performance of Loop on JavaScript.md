@@ -95,3 +95,27 @@ Result 4
 { rss: 61001728, heapTotal: 49152000, heapUsed: 43911648 }
 294ms
 ```
+
+Test 5
+```js
+"use strict";
+
+const TEST_SIZE = 1000000;
+
+let arr5 = (new Array(TEST_SIZE)).fill(1);
+let target5 = [];
+let iStart5 = (new Date()).getTime();
+console.log(process.memoryUsage());
+for (let obj in arr5) {
+    target5.push(arr5[obj]);
+}
+let iEnd5 = (new Date()).getTime();
+console.log(process.memoryUsage());
+console.log((iEnd5 - iStart5)+'ms');
+```
+Result 5
+```
+{ rss: 27316224, heapTotal: 18501632, heapUsed: 11963568 }
+{ rss: 115802112, heapTotal: 89677824, heapUsed: 83911776 }
+728ms
+```
