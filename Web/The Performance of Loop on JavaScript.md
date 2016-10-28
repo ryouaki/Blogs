@@ -9,7 +9,7 @@ let target1 = [];
 let iStart1 = (new Date()).getTime();
 console.log(process.memoryUsage());
 for (let i=0; i < arr1.length; i++) {
-    target1.push(i);
+    target1.push(arr1[i]);
 }
 let iEnd1 = (new Date()).getTime();
 console.log(process.memoryUsage());
