@@ -14,24 +14,24 @@
 - displayName 用于设置debug的时候的message。
 - propTypes 用于规定props属性的类型，static propTypes = { propsName: React.PropTypes.string}; 具体的类型参见
 ```js
-	    * React.PropTypes。
-            * React.PropTypes.array
-            * React.PropTypes.bool
-            * React.PropTypes.func
-            * React.PropTypes.number
-            * React.PropTypes.object
-            * React.PropTypes.string
-            * React.PropTypes.symbol
-            * React.PropTypes.node
-            * React.PropTypes.element
-            * React.PropTypes.instanceOf()
-            * React.PropTypes.oneOf()
-            * React.PropTypes.oneOfType()
-            * React.PropTypes.arrayOf()
-            * React.PropTypes.objectOf()
-            * React.PropTypes.shape()
-            * React.PropTypes.any
-            * React.PropTypes
+* React.PropTypes。
+* React.PropTypes.array
+* React.PropTypes.bool
+* React.PropTypes.func
+* React.PropTypes.number
+* React.PropTypes.object
+* React.PropTypes.string
+* React.PropTypes.symbol
+* React.PropTypes.node
+* React.PropTypes.element
+* React.PropTypes.instanceOf()
+* React.PropTypes.oneOf()
+* React.PropTypes.oneOfType()
+* React.PropTypes.arrayOf()
+* React.PropTypes.objectOf()
+* React.PropTypes.shape()
+* React.PropTypes.any
+* React.PropTypes
 ```
 - render 该函数必须返回一个单一的React元素。当然你也可以return null或者false。在这里不能更改state和props。
 - constructor 该函数在mount之前被执行，可以在所有执行语句之前执行super(props),除非你允许props的值可以为undefined，在这里我们也可以初始化state，this.state={key:value};
