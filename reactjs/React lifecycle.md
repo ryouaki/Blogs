@@ -12,7 +12,9 @@
 - forceUpdate 默认情况下，render会因为state和props的更新而被调用，但是某些时候我们想执行render，但是又不更新state和props的时候可以通过调用该api促使render跳过shouldComponentUpdate被强制执行。并且会促发component的生命周期函数。一般情况下，我们不建议使用该函数。
 - defaultProps 指定一个component的props的默认值，在es6语法下 static defaultProps = { propsName: value};
 - displayName 用于设置debug的时候的message。
-- propTypes 用于规定props属性的类型，static propTypes = { propsName: React.PropTypes.string}; 具体的类型参见React.PropTypes。
+- propTypes 用于规定props属性的类型，static propTypes = { propsName: React.PropTypes.string}; 具体的类型参见
+```js
+	    * React.PropTypes。
             * React.PropTypes.array
             * React.PropTypes.bool
             * React.PropTypes.func
@@ -30,6 +32,7 @@
             * React.PropTypes.shape()
             * React.PropTypes.any
             * React.PropTypes
+```
 - render 该函数必须返回一个单一的React元素。当然你也可以return null或者false。在这里不能更改state和props。
 - constructor 该函数在mount之前被执行，可以在所有执行语句之前执行super(props),除非你允许props的值可以为undefined，在这里我们也可以初始化state，this.state={key:value};
 - isRequired 该属性是必须值，static contextTypes = { propsName: React.PropTypes.string.isRequired}
