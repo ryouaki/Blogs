@@ -1,6 +1,6 @@
 # React 
 
-[](https://github.com/ryouaki/Blogs/blob/master/reactjs/ajs-life.png)
+![img](https://github.com/ryouaki/Blogs/blob/master/reactjs/ajs-life.png)
 
 ## 生命周期
 - componentDidMount 在组件初始化的时候执行该函数，这里适合请求网络数据，在这里更改state会导致render。
