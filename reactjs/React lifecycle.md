@@ -1,5 +1,7 @@
 # React 
 
+[](https://github.com/ryouaki/Blogs/blob/master/reactjs/ajs-life.png)
+
 ## 生命周期
 - componentDidMount 在组件初始化的时候执行该函数，这里适合请求网络数据，在这里更改state会导致render。
 - componentWillReceiveProps 当组件接受到一个新值的时候执行，即使在props没有更新的时候，但是父组件导致了该子组件调用这个api，所以要判断props是否真的改变再进行操作。在这里更改state并不会导致render。
