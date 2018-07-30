@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { Message, Notification, MessageBox } from 'element-ui';
 
+const CancelToken = axios.CancelToken
+
 /*
  * url 服务器 api地址
  * params 参数
@@ -19,12 +21,16 @@ class Http {
       baseUrl = '/api',
       contentType = 'application/json',
       withCredentials = true,
+      tips = 0,
+      cancelToken = undefined
     } = opts;
 
+    this.tips = tips;
     this.timeout = timeout;
     this.baseUrl = baseUrl;
     this.contentType = contentType;
     this.withCredentials = withCredentials;
+    this.cancelToken = cancelToken;
   }
 
   get(url, params = {}, opts = {}) {
@@ -55,9 +61,10 @@ class Http {
       onUploadProgress: opts.uploading,
       onDownloadProgress: opts.download,
       withCredentials: opts.withCredentials !== undefined ? opts.withCredentials : this.withCredentials,
+      cancelToken: opts.cancelToken ? opts.cancelToken : this.cancelToken,
       ...params,
     });
-
+    
     return ajaxRequest.then((res) => {
       const {
         data = {
@@ -73,30 +80,36 @@ class Http {
           opts.success(data.data);
         }
         ret = data.data;
+      } else if (data.code === 401) {
+        window.location.href = window.location.protocol + '//' +window.location.host+'/#/login';
       } else {
-        ret = Http.errorHandler(data, opts);
+        ret = this.errorHandler(data, opts);
       }
 
-      return ret;
+      return Promise.resolve(ret);
     }).catch((err) => {
-      const {
-        data = {
-          code: 10500,
-          message: '服务器链接错误，请稍后再试！',
-          data: null,
-        },
-      } = err.response || {};
-
-      return Http.errorHandler(data, opts);
+      if (!(err instanceof axios.Cancel)) {
+        const {
+          data = {
+            code: 10500,
+            message: '服务器链接错误，请稍后再试！',
+            data: null,
+          },
+        } = err.response || {};
+  
+        return Promise.reject(this.errorHandler(data, opts));
+      } else {
+        return Promise.reject('Request cancel!');
+      }
     });
   }
 
-  static errorHandler(data, opts) {
+  errorHandler(data, opts) {
     if (opts.failed && typeof opts.failed === 'function') {
       opts.failed(data);
     }
     // 0,不做默认提示处理，1，notice，2，alert，3，右侧提示
-    switch (opts.tips) {
+    switch (opts.tips || this.tips) {
       case 1:
         Message({
           message: data.message,
@@ -126,5 +139,14 @@ class Http {
 }
 
 export const http = new Http();
-
+export const mkCancel = function () {
+  let cancel;
+  let token = new CancelToken(function execCancel(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  }
+}
 export default Http;
