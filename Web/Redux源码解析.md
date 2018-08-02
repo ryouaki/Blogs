@@ -343,7 +343,7 @@ const middlewareAPI = {
 }
 const chain = middlewares.map(middleware => middleware(middlewareAPI))
 ```
-通过以上代码，我们将所有传入的`middleware`进行了一次剥皮，把第一层高阶函数返回的函数拿出来，也就是`(next) => (action) => { ... }`部分。
+通过以上代码，我们将所有传入的`middleware`进行了一次剥皮，把第一层高阶函数返回的函数拿出来。这样`chain`其实是一个`(next) => (action) => { ... }`函数的数组，也就是中间件剥开后返回的函数组成的数组。
 然后通过`compose`对中间件数组内剥出来的高阶函数进行组合形成一个调用链。调用一次，中间件内的所有函数都将被执行。
 ```js
 function compose(...funcs) {
@@ -358,9 +358,9 @@ function compose(...funcs) {
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
 ```
-因此经过`compose`处理后，传入中间件的`next`实际上就是`store.dispatch`。这样经过`applyMiddleware`处理后的`dispatch`在每次被调用的时候，就要先经过中间件`middlewares`中定义的函数进行过滤一遍。
+因此经过`compose`处理后，传入中间件的`next`实际上就是`store.dispatch`。而这样处理后返回的新的`dispatch`，就是经过`applyMiddleware`第二次剥开后的高阶函数`(action) => {...}`组成的函数链。而这个函数链传递给`applyMiddleware`返回值的`dispatch`属性。
 
-而通过`applyMiddleware`返回后的`dispatch`被返回给`store`对象内，也就成了我们在外面使用的`dispatch`。真的好高级啊。我只能看懂这块代码，但是一直没有用会这个用法。在很早以前读`koa2`的中间件代码中也有这种用法。
+而通过`applyMiddleware`返回后的`dispatch`被返回给`store`对象内，也就成了我们在外面使用的`dispatch`。这样也就实现了调用`dispatch`就实现了调用所有注册的中间件。
 
 ## 结束语
 Redux的代码虽然只有短短几百行，但是蕴含着很多设计模式的思想和高级JS语法在里面。每次读完，都会学到新的知识。而作者对于高阶函数的使用是大家极好的参考。
