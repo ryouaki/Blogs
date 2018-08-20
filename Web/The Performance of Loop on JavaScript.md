@@ -56,7 +56,7 @@ let arr3 = (new Array(TEST_SIZE)).fill(1);
 let target3 = [];
 let iStart3 = (new Date()).getTime();
 console.log(process.memoryUsage());
-arr3.forEach(function(item){
+arr3.map(function(item){
     target3.push(item);
 });
 let iEnd3 = (new Date()).getTime();
