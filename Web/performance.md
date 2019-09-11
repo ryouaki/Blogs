@@ -58,3 +58,34 @@ export function getBorwserInfo() {
   };
 }
 ```
+
+资源加载性能
+```js
+let  entryTimesList = [];
+  let entryList = window.performance.getEntries();
+  entryList.forEach((item,index)=>{
+  
+     let templeObj = {};
+     
+     let usefulType = ['navigation','script','css','fetch','xmlhttprequest','link','img'];
+     if(usefulType.indexOf(item.initiatorType)>-1){
+       templeObj.name = item.name;
+       
+       templeObj.nextHopProtocol = item.nextHopProtocol;
+      
+       //dns查询耗时
+       templeObj.dnsTime = item.domainLookupEnd - item.domainLookupStart;
+
+       //tcp链接耗时
+       templeObj.tcpTime = item.connectEnd - item.connectStart;
+       
+       //请求时间
+       templeObj.reqTime = item.responseEnd - item.responseStart;
+
+       //重定向时间
+       templeObj.redirectTime = item.redirectEnd - item.redirectStart;
+
+       entryTimesList.push(templeObj);
+     }
+  });
+```
