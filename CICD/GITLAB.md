@@ -22,4 +22,5 @@
 
  # sudo EXTERNAL_URL="https://gitlab.example.com" yum install -y gitlab-ce
 
+ # gitlab-ctl start
 ```
