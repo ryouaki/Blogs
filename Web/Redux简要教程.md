@@ -15,37 +15,37 @@ Actions 是应用程序将数据发送到 store 的载体。可以通过 store.d
 
 下面是几个例子:
 
-\`\`\`js
+```js
   const ADD_TODO = 'ADD_TODO';
 
   {
     type: ADD_TODO,
     text: 'Build my first Redux app'
   }
-\`\`\`
+```
 
 Actions 是一个原生 JavaScript 对象，并且必须带有一个 type 属性作为识别行为的标示。type 是一个静态字符串。如果你的应用很庞大，那么你需要把他们移到一个模块中：
 
-\`\`\`JS
+```JS
   import { ADD_TODO, REMOVE_TODO } from '../actionTypes'
-\`\`\`
+```
 
 ### Action Creators
 
 Action Creators 是用于创建 action 对象的函数:
 
-\`\`\`JS
+```JS
   function addTodo(text) {
     return {
       type: ADD_TODO,
       text
     }
   }
-\`\`\`
+```
 
 在一些复杂应用中，我们还需要在 Action Creator 中派发其它 action:
 
-\`\`\`JS
+```JS
   function addTodoWithDispatch(text) {
     const action = {
       type: ADD_TODO,
@@ -53,14 +53,14 @@ Action Creators 是用于创建 action 对象的函数:
     }
     dispatch(action)
   }
-\`\`\`
+```
 
 当然还有更复杂的，直接派发一个 Action Creator:
 
-\`\`\`JS
+```JS
   dispatch(addTodo(text))
   dispatch(completeTodo(index))
-\`\`\`
+```
 
 ### Reducers
 
@@ -70,9 +70,9 @@ Reducers 用于根据接受的 action 对象，对 store 内的数据进行相�
 
 Reducer 必须是一个纯函数，它的参数是之前的状态和接收的 action，然后返回一个新的状态对象。
 
-\`\`\`JS
+```JS
   (previousState, action) => newState
-\`\`\`
+```
 
 之所以叫做 reducer 是因为它被作为一种函数被传入到 Array.prototype.reduce(reducer, ?initialValue)。这是保持 reducer 是一个纯函数是非常重要的。不要在里面做下面的事情:
 
@@ -82,7 +82,7 @@ Reducer 必须是一个纯函数，它的参数是之前的状态和接收的 ac
 
 下面的代码将会是一个非常简单的 reducer 实现:
 
-\`\`\`JS
+```JS
   import { VisibilityFilters } from './actions'
   ​
   const initialState = {
@@ -99,17 +99,17 @@ Reducer 必须是一个纯函数，它的参数是之前的状态和接收的 ac
     // and just return the state given to us.
     return state
   }
-\`\`\`
+```
 
 我们必须在 reducer 中处理完 action 后创建一个新的 state 并作为返回值。像下面这样：
 
-\`\`\`JS
+```JS
   { ...state, ...newState }
-\`\`\`
+```
 
 reducer 在默认情况下或者遇到未知 action 的时候，需要返回传入的 state 。
 
-\`\`\`JS
+```JS
   import {
     ADD_TODO,
     TOGGLE_TODO,
@@ -139,13 +139,13 @@ reducer 在默认情况下或者遇到未知 action 的时候，需要返回传�
         return state
     }
   }
-\`\`\`
+```
 
 就像之前提到的，我们并不是直接操作 state 或者它的属性，而是返回一个新的对象。
 
 有的时候，我们的系统过于庞大，这样 reducer 就会变得复杂而庞大。这个时候我们就需要将 reducer 拆分
 
-\`\`\`js
+```js
   function todos(state = [], action) {
     switch (action.type) {
       case ADD_TODO:
@@ -185,11 +185,11 @@ reducer 在默认情况下或者遇到未知 action 的时候，需要返回传�
       todos: todos(state.todos, action)
     }
   }
-\`\`\`
+```
 
 每一个 reducer 都只管理属于自己那部分状态。而每一个 reducer 返回的状态都会成为 store 的一部分。这里我们需要通过 combineReducers() 来将这些 reducer 组合到一起
 
-\`\`\`js
+```js
   import { combineReducers } from 'redux'
   ​
   const todoApp = combineReducers({
@@ -198,7 +198,7 @@ reducer 在默认情况下或者遇到未知 action 的时候，需要返回传�
   })
   ​
   export default todoApp
-\`\`\`
+```
 
 ### Store
 
@@ -210,21 +210,21 @@ Store 就是一堆对象的集合。Store 包含以下功能：
 - 注册订阅者
 - 取消注册的订阅者
 
-\`\`\`js
+```js
   import { createStore } from 'redux'
   import todoApp from './reducers'
   const store = createStore(todoApp)
-\`\`\`
+```
 
 createStore 具有一个可选参数，可以初始化 store 中的状态。这对于部分场景很重要，比如说内置入后端预先处理的数据，直接注入到 store 中，这样页面就避免了 ajax 请求的响应时间提升了页面显示速度，如果没有 SEO 要求的话，这种方式是一个成本非常低的提高首屏加载速度的方式，之前我在项目中使用过。
 
-\`\`\`js
+```js
   const store = createStore(todoApp, window.STATE_FROM_SERVER)
-\`\`\`
+```
 
 我们可以通过 dispatch 派发 action 对象来改变 store 内部存储的状态：
 
-\`\`\`js
+```js
   import {
     addTodo,
     toggleTodo,
@@ -251,7 +251,7 @@ createStore 具有一个可选参数，可以初始化 store 中的状态。这�
   ​
   // Stop listening to state updates
   unsubscribe()
-\`\`\`
+```
 
 
 ### Redux 数据流
@@ -275,11 +275,11 @@ Redux 遵循严格的单向数据流。意味着所有的应用都要遵循相�
 - 一个用于告诉 reducer 请求成功的 action (这里我们需要将接收到的数据更新到 store 中，并重置 isFetching)
 - 一个用于告诉 reducer 请求异常的 action (重置 isFetching，更新 store 中一个可以通知 UI 发生错误的状态)
 
-\`\`\`js
+```js
   { type: 'FETCH_POSTS' }
   { type: 'FETCH_POSTS', status: 'error', error: 'Oops' }
   { type: 'FETCH_POSTS', status: 'success', response: { ... } }
-\`\`\`
+```
 
 通常，我们需要在异步开始前和回调中通过 store.dispatch 来派发这些 action 来告知 store 更新状态。
 
@@ -289,7 +289,7 @@ Redux 遵循严格的单向数据流。意味着所有的应用都要遵循相�
 
 对于同步 action，我们只需要在 action creator 中返回一个 action 纯对象即可。
 
-\`\`\`js
+```js
   export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT'
   ​
   export function selectSubreddit(subreddit) {
@@ -298,7 +298,7 @@ Redux 遵循严格的单向数据流。意味着所有的应用都要遵循相�
       subreddit
     }
   }
-\`\`\`
+```
 
 ### Async Flow
 
@@ -308,7 +308,7 @@ Redux 仅支持同步的数据流，只能在中间件中处理异步。因此�
 
 下面是一个通过 Redux-Thunk 处理异步 action 的例子：
 
-\`\`\`js
+```js
   import fetch from 'cross-fetch'
   import thunkMiddleware from 'redux-thunk'
   import { createLogger } from 'redux-logger'
@@ -395,7 +395,7 @@ Redux 仅支持同步的数据流，只能在中间件中处理异步。因此�
         )
     }
   }
-\`\`\`
+```
 
 ### 中间件
 
@@ -403,7 +403,7 @@ Redux 仅支持同步的数据流，只能在中间件中处理异步。因此�
 
 Redux 的中间件解决的是和 express 或者 koa 完全不同的问题，但是原理上差不多。它提供一种第三方插件机制，来在 dispatch 和 reducer 之间做一些特殊处理。就像下面这样：
 
-\`\`\`js
+```js
   const next = store.dispatch
   store.dispatch = function dispatchAndLog(action) {
     console.log('dispatching', action)
@@ -411,11 +411,11 @@ Redux 的中间件解决的是和 express 或者 koa 完全不同的问题，但
     console.log('next state', store.getState())
     return result
   }
-\`\`\`
+```
 
 那么我们如何完成一个自己的中间件呢？下面是一个典型的例子：
 
-\`\`\`js
+```js
   // 其中 next 就是 dispatch
   const logger = store => next => action => {
     console.log('dispatching', action)
@@ -448,4 +448,4 @@ Redux 的中间件解决的是和 express 或者 koa 完全不同的问题，但
     // applyMiddleware() tells createStore() how to handle middleware
     applyMiddleware(logger, crashReporter)
   )
-\`\`\`
+```
