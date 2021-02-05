@@ -1,0 +1,20 @@
+基本公式
+邻边＝cos角a*斜边
+斜边＝对边/sin角a＝邻边/cos角a
+
+求一个点到两个点连成的直线的距离
+if (p1.x - p2.x == 0) {
+  len = Math.abs(p.x - p1.x)
+}
+else {
+  let A = (p1.y - p2.y) / (p1.x - p2.x)
+  let B = p1.y - A * p1.x
+
+  len = Math.abs((A * p.x + B - p.y) / Math.sqrt(A * A + 1))
+}
+
+求一个点在线的左侧还是右侧
+(p0.x - p.x) * (p1.y - p.y) - (p1.x - p.x) * (p0.y - p.y)
+// > 0 在左侧
+// = 0 在线上
+// < 0 在右侧
