@@ -2,7 +2,7 @@
 2. ./configure --debug
 3. make -C out  BUILDTYPE=Debug -j4
 4. VSC添加c/c++插件
-5. 
+5. 改写.vscode/launch.json
 ```js
 {
   // Use IntelliSense to learn about possible attributes.
