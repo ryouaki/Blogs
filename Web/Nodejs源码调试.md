@@ -1,8 +1,9 @@
-- 下载源码
-- ./configure --debug
-- make -C out  BUILDTYPE=Debug -j4
-- VSC添加c/c++插件
-- ```js
+1. 下载源码
+2. ./configure --debug
+3. make -C out  BUILDTYPE=Debug -j4
+4. VSC添加c/c++插件
+5. 
+```js
 {
   // Use IntelliSense to learn about possible attributes.
   // Hover to view descriptions of existing attributes.
@@ -23,4 +24,4 @@
   ]
 }
 ```
-- 设置断点。
+6. 设置断点。
