@@ -29,4 +29,15 @@ export function readXPath(element) {
     }
   }
 }
+// 根据xpath查dom
+function domFromXPath(xpath) {
+  const vel = document.evaluate(xpath, document, null, XPathResult.ANY_TYPE, null)
+  const ret = [];
+  let dom = vel.iterateNext();
+  while (dom) {
+    ret.push(dom);
+    dom = vel.iterateNext();
+  }
+  return ret;
+}
 ```
